@@ -22,6 +22,8 @@
       --badge-code-text: #3b6d11;
       --badge-stats: #e6f1fb;
       --badge-stats-text: #185fa5;
+      --badge-cert: #faeeda;
+      --badge-cert-text: #854f0b;
     }
 
     body {
@@ -183,6 +185,7 @@
 
     .tag.code { background: var(--badge-code); color: var(--badge-code-text); }
     .tag.stats { background: var(--badge-stats); color: var(--badge-stats-text); }
+    .tag.cert { background: var(--badge-cert); color: var(--badge-cert-text); }
     .tag.generic { background: var(--tag-bg); color: var(--tag-text); }
 
     .card-title {
@@ -260,6 +263,69 @@
       flex-shrink: 0;
     }
 
+    /* ── CERT SECTION ── */
+    .section-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin: 48px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background 0.12s;
+    }
+
+    .cert-card:hover { background: #fdfcfb; }
+
+    .cert-topic {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--badge-cert-text);
+      background: var(--badge-cert);
+      padding: 3px 9px;
+      border-radius: 100px;
+      width: fit-content;
+    }
+
+    .cert-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .cert-source {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
     /* ── FOOTER ── */
     footer {
       max-width: 780px;
@@ -317,6 +383,7 @@
     <button class="filter-btn active" onclick="filter('all', this)">Todos</button>
     <button class="filter-btn" onclick="filter('code', this)">Programación</button>
     <button class="filter-btn" onclick="filter('stats', this)">Estadística</button>
+    <button class="filter-btn" onclick="filter('cert', this)">Certificaciones</button>
   </div>
 
   <p class="section-label" id="count-label"><!-- se actualiza con JS --></p>
@@ -355,14 +422,7 @@
       </div>
     </a>
 
-    <!-- ══ PROYECTO 3 — edita aquí ══ -->
-    <a class="project-card" href="#" data-type="stats">
-      <div class="card-main">
-        <div class="card-tags">
-          <span class="tag code">Programación</span>
-          <span class="tag generic">Java</span>
-        </div>
-        <p class="card-title">Memoizacion_Dinamica</p>
+    <a class="project-card" href="#" data-type="code">
         <p class="card-desc">Sistema para planificar rutas óptimas de recolección de paquetes para agentes postales. Con dos implementaciones, una recursiva y una solución iterativa con pilas.</p>
       </div>
       <div class="card-right">
@@ -372,7 +432,7 @@
     </a>
 
         <!-- ══ PROYECTO 4 — edita aquí ══ -->
-    <a class="project-card" href="#" data-type="stats">
+    <a class="project-card" href="#" data-type="code">
       <div class="card-main">
         <div class="card-tags">
           <span class="tag code">Programación</span>
@@ -388,7 +448,7 @@
     </a>
 
             <!-- ══ PROYECTO 5 — edita aquí ══ -->
-    <a class="project-card" href="#" data-type="stats">
+    <a class="project-card" href="#" data-type="code">
       <div class="card-main">
         <div class="card-tags">
           <span class="tag code">Programación</span>
@@ -411,6 +471,68 @@
     </div>
 
   </div>
+
+  <!-- ══ SECCIÓN CERTIFICACIONES ══ -->
+  <div id="cert-section">
+    <p class="section-title">Certificaciones DataCamp</p>
+    <div class="cert-grid">
+
+      <div class="cert-card">
+        <span class="cert-topic">Datos</span>
+        <p class="cert-name">Data Manipulation with pandas</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">Desarrollo</span>
+        <p class="cert-name">Introduction to FastAPI</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">Datos</span>
+        <p class="cert-name">Introduction to Polars</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">Desarrollo</span>
+        <p class="cert-name">Software Engineering Principles in Python</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">Desarrollo</span>
+        <p class="cert-name">Intermediate Python for Developers</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">Desarrollo</span>
+        <p class="cert-name">Introduction to Python for Developers</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">DevOps</span>
+        <p class="cert-name">Introduction to Docker</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">DevOps</span>
+        <p class="cert-name">Intermediate GitHub Concepts</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+      <div class="cert-card">
+        <span class="cert-topic">DevOps</span>
+        <p class="cert-name">Introduction to GitHub Concepts</p>
+        <span class="cert-source">DataCamp</span>
+      </div>
+
+    </div>
+  </div>
 </main>
 
 <footer>
@@ -424,6 +546,7 @@
   const cards = document.querySelectorAll('.project-card');
   const label = document.getElementById('count-label');
   const empty = document.getElementById('empty-state');
+  const certSection = document.getElementById('cert-section');
 
   function updateCount(visible) {
     label.textContent = visible + ' proyecto' + (visible !== 1 ? 's' : '');
@@ -432,14 +555,22 @@
   function filter(type, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+
+    const showCerts = type === 'all' || type === 'cert';
+    certSection.style.display = showCerts ? 'block' : 'none';
+
     let visible = 0;
     cards.forEach(card => {
-      const match = type === 'all' || card.dataset.type === type;
+      const match = type === 'all' || (type !== 'cert' && card.dataset.type === type);
       card.classList.toggle('hidden', !match);
       if (match) visible++;
     });
-    empty.style.display = visible === 0 ? 'block' : 'none';
-    updateCount(visible);
+
+    const projectGrid = document.getElementById('project-grid');
+    projectGrid.style.display = (type === 'cert') ? 'none' : 'grid';
+    label.style.display = (type === 'cert') ? 'none' : 'block';
+    empty.style.display = (type !== 'cert' && visible === 0) ? 'block' : 'none';
+    if (type !== 'cert') updateCount(visible);
   }
 
   updateCount(cards.length);
