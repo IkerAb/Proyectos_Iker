@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio — Iker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --border: #e4e2dd;
+      --text: #1a1917;
+      --muted: #6b6963;
+      --accent: #1a1917;
+      --tag-bg: #f0ede8;
+      --tag-text: #3d3b38;
+      --badge-code: #eaf3de;
+      --badge-code-text: #3b6d11;
+      --badge-stats: #e6f1fb;
+      --badge-stats-text: #185fa5;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 80px 32px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    header h1 span {
+      font-weight: 500;
+    }
+
+    .header-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.6;
+    }
+
+    .header-meta {
+      margin-top: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      padding: 32px 0 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { border-color: var(--text); color: var(--text); }
+    .filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      margin-top: 8px;
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      background: var(--surface);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px 24px;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.12s;
+      position: relative;
+    }
+
+    .project-card:hover { background: #fdfcfb; }
+
+    .project-card.hidden { display: none; }
+
+    .card-main {}
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      padding: 3px 9px;
+      border-radius: 100px;
+    }
+
+    .tag.code { background: var(--badge-code); color: var(--badge-code-text); }
+    .tag.stats { background: var(--badge-stats); color: var(--badge-stats-text); }
+    .tag.generic { background: var(--tag-bg); color: var(--tag-text); }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .card-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 4px;
+      text-align: right;
+    }
+
+    .card-arrow {
+      font-size: 14px;
+      color: var(--border);
+      transition: color 0.12s, transform 0.12s;
+      padding-top: 4px;
+      grid-column: 2;
+    }
+
+    .project-card:hover .card-arrow { color: var(--text); transform: translateX(3px); }
+
+    .card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      padding: 48px 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      display: none;
+    }
+
+    /* ── ADD CARD ── */
+    .add-card {
+      background: var(--bg);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px dashed var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      font-family: 'DM Mono', monospace;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .add-icon {
+      width: 24px;
+      height: 24px;
+      border: 1px dashed var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+    }
+
+    .footer-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-right a {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.12s, border-color 0.12s;
+    }
+
+    .footer-right a:hover { color: var(--text); border-color: var(--text); }
+
+    @media (max-width: 600px) {
+      header, main { padding-left: 20px; padding-right: 20px; }
+      header { padding-top: 48px; }
+      .project-card { padding: 20px; grid-template-columns: 1fr; }
+      .card-right { flex-direction: row; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="header-label">Portafolio académico</p>
+  <h1>Hola, soy <span>Iker.</span><br>Aquí están mis proyectos.</h1>
+  <p class="header-sub">Trabajo con código, estadística y análisis de datos. Esta página reúne lo que he construido a lo largo de mi carrera.</p>
+  <div class="header-meta">
+    <span class="meta-item"><span class="dot"></span> Programación</span>
+    <span class="meta-item"><span class="dot"></span> Estadística</span>
+    <span class="meta-item"><span class="dot"></span> Análisis de datos</span>
+  </div>
+</header>
+
+<main>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filter('all', this)">Todos</button>
+    <button class="filter-btn" onclick="filter('code', this)">Programación</button>
+    <button class="filter-btn" onclick="filter('stats', this)">Estadística</button>
+  </div>
+
+  <p class="section-label" id="count-label"><!-- se actualiza con JS --></p>
+
+  <div class="project-grid" id="project-grid">
+
+    <!-- ══ PROYECTO 1 — edita aquí ══ -->
+    <a class="project-card" href="#" data-type="stats">
+      <div class="card-main">
+        <div class="card-tags">
+          <span class="tag stats">Estadística</span>
+          <span class="tag generic">R</span>
+        </div>
+        <p class="card-title">Análisis de series de tiempo</p>
+        <p class="card-desc">Modelos de pronóstico y visualización de métricas de precisión (RMSE, MAE, MAPE) con funciones modulares en R.</p>
+      </div>
+      <div class="card-right">
+        <span class="card-date">2024</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- ══ PROYECTO 2 — edita aquí ══ -->
+    <a class="project-card" href="#" data-type="code">
+      <div class="card-main">
+        <div class="card-tags">
+          <span class="tag code">Programación</span>
+          <span class="tag generic">Python</span>
+        </div>
+        <p class="card-title">Proyecto de código</p>
+        <p class="card-desc">Descripción breve de lo que hace este proyecto. Cambia este texto con el nombre y detalle real.</p>
+      </div>
+      <div class="card-right">
+        <span class="card-date">2024</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- ══ PROYECTO 3 — edita aquí ══ -->
+    <a class="project-card" href="#" data-type="stats">
+      <div class="card-main">
+        <div class="card-tags">
+          <span class="tag stats">Estadística</span>
+          <span class="tag generic">R</span>
+        </div>
+        <p class="card-title">Proyecto de estadística</p>
+        <p class="card-desc">Descripción breve. Puedes enlazar a un PDF, a un repo de GitHub, o a una carpeta de Drive.</p>
+      </div>
+      <div class="card-right">
+        <span class="card-date">2023</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <div class="empty" id="empty-state">No hay proyectos en esta categoría todavía.</div>
+
+    <div class="add-card">
+      <div class="add-icon">+</div>
+      Agrega más proyectos copiando un bloque <code>project-card</code> arriba de esta línea.
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="footer-left">Iker · portafolio académico</span>
+  <div class="footer-right">
+    <a href="https://github.com/TU_USUARIO" target="_blank">GitHub →</a>
+  </div>
+</footer>
+
+<script>
+  const cards = document.querySelectorAll('.project-card');
+  const label = document.getElementById('count-label');
+  const empty = document.getElementById('empty-state');
+
+  function updateCount(visible) {
+    label.textContent = visible + ' proyecto' + (visible !== 1 ? 's' : '');
+  }
+
+  function filter(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    let visible = 0;
+    cards.forEach(card => {
+      const match = type === 'all' || card.dataset.type === type;
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+    empty.style.display = visible === 0 ? 'block' : 'none';
+    updateCount(visible);
+  }
+
+  updateCount(cards.length);
+</script>
+
+</body>
+</html>
